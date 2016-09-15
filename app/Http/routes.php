@@ -39,7 +39,7 @@ Route::post('/task', function (Request $request) {
             ->withInput()
             ->withErrors($validator);
     }
-
+    dd($request->all());
     $task = new Task;
     $task->name = $request->name;
     $task->save();
@@ -51,5 +51,10 @@ Route::post('/task', function (Request $request) {
  * Delete Task
  */
 Route::delete('/task/{task}', function (Task $task) {
-    //
+    $task->delete();
+
+    return redirect('/');
 });
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
